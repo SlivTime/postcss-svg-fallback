@@ -23,10 +23,12 @@ function hash(input) {
 module.exports = postcss.plugin('postcss-svg-fallback', function(options) {
 	var fallbackSelector;
 	var disableConvert;
+	var urlToDirectory;
 	options = options || {};
 
 	fallbackSelector = options.fallbackSelector || '.no-svg';
 	disableConvert = options.disableConvert || false;
+	urlToDirectory = options.urlToDirectory || '';
 
 	return function (css, result) {
 		var images = [];
@@ -94,7 +96,7 @@ module.exports = postcss.plugin('postcss-svg-fallback', function(options) {
 					postcssRule: rule,
 					image: backgroundImage,
 					newImage: newImage,
-					size: backgroundSize,
+					size: backgroundSize
 				});
 
 				newSelectors = rule.selectors.map(function(selector) {
@@ -106,7 +108,7 @@ module.exports = postcss.plugin('postcss-svg-fallback', function(options) {
 
 				newDecl = postcss.decl({
 					prop: 'background-image',
-					value: 'url(' + newImage + ')',
+					value: 'url('+ urlToDirectory + newImage + ')'
 				});
 				newDecl.source = matchedBackgroundImageDecl.source;
 
@@ -132,8 +134,8 @@ module.exports = postcss.plugin('postcss-svg-fallback', function(options) {
 });
 
 function processImage(options, image, cb) {
-	var source = path.join(options.basePath || '', image.image);
-	var dest = path.join(options.dest || '', image.newImage);
+	var source = path.resolve(options.basePath || '', image.image);
+	var dest = path.resolve(options.dest || '', image.newImage);
 
 	var args = [
 		phantomjsScript,
