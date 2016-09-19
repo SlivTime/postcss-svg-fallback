@@ -9,13 +9,13 @@
 	"main": "index.js",
 	"dependencies": {
 		"postcss": "~4.1.9",
-		"phantomjs": "~1.9.16",
 		"async": "~0.9.0",
 		"when": "~3.7.3"
 	},
 	"devDependencies": {
 		"mocha": "",
 		"chai": ""
+		"phantomjs": "~1.9.16"
 	},
 	"keywords": [
 		"postcss",
