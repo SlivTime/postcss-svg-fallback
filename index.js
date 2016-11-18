@@ -8,7 +8,7 @@ var crypto = require('crypto');
 var postcss = require('postcss');
 var async = require('async');
 var when = require('when');
-var phantomjs = require('phantomjs');
+var phantomjs = require('phantomjs-prebuilt');
 var childProcess = require('child_process');
 
 var phantomjsScript = path.resolve(__dirname, './phantomjs-script.js');
