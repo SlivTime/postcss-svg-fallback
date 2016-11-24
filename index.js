@@ -164,7 +164,7 @@ function processImage(options, image, cb) {
 
 function statDest(sourceStat, dest, args, cb) {
 	fs.stat(dest, function(destErr, destStat) {
-		if (!destStat || !sourceStat || sourceStat !== 'inline' || sourceStat.mtime > destStat.mtime) {
+		if (!destStat || !sourceStat || sourceStat === 'inline' || sourceStat.mtime > destStat.mtime) {
 			runPhantomJs(args, cb);
 		} else {
 			cb();
